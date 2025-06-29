@@ -2,6 +2,8 @@
 
 # Script pour push GitHub avec credentials depuis .env.git
 
+echo "🚀 Push vers GitHub - PortCall AI Frontend"
+
 # Charger les variables d'environnement
 if [ -f .env.git ]; then
     export $(cat .env.git | grep -v '^#' | xargs)
@@ -26,11 +28,12 @@ REPO_URL="https://$GITHUB_TOKEN@github.com/Macmala/portcall-checklist-ui.git"
 git remote set-url origin "$REPO_URL"
 
 # Push vers GitHub
-echo "🚀 Push vers GitHub..."
+echo "📤 Push en cours..."
 git push -u origin main
 
 # Remettre l'URL propre (sans token)
 git remote set-url origin "https://github.com/Macmala/portcall-checklist-ui.git"
 
-echo "✅ Push terminé !"
+echo "✅ Push terminé avec succès !"
 echo "📍 Repository: https://github.com/Macmala/portcall-checklist-ui"
+echo "🌐 Vous pouvez maintenant voir votre code sur GitHub !"
