@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import PortCallChecklist from './components/PortCallChecklist';
 
-// const API_URL = 'http://localhost:3001'; // URL is now hardcoded in fetch calls to fix 404 error.
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 // Helper function to convert markdown-style links to clickable HTML links
 const convertLinksToClickable = (text) => {
@@ -47,12 +47,12 @@ function App() {
 
     const interval = setInterval(async () => {
       try {
-        const response = await fetch(`http://localhost:3001/api/checklist/${requestId}/status`);
+        const response = await fetch(`${API_URL}/api/checklist/${requestId}/status`);
         const data = await response.json();
 
         if (data.status === 'completed') {
           clearInterval(interval);
-          const finalResponse = await fetch(`http://localhost:3001/api/checklist/${requestId}`);
+          const finalResponse = await fetch(`${API_URL}/api/checklist/${requestId}`);
           const finalData = await finalResponse.json();
           setChecklistData(finalData);
           setIsLoading(false);
@@ -75,7 +75,7 @@ function App() {
     setChecklistData(null);
 
     try {
-      const response = await fetch('http://localhost:3001/api/checklist', {
+      const response = await fetch(`${API_URL}/api/checklist`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
