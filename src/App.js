@@ -4,31 +4,9 @@ import PortCallChecklist from './components/PortCallChecklist';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
-// Helper function to convert markdown-style links to clickable HTML links
-const convertLinksToClickable = (text) => {
-  if (!text) return text;
-  
-  // Pattern for 📎 Link: [Text](URL) format
-  const linkPattern = /📎\s*(Link|Portal|Forms|Fuel|Services):\s*\[([^\]]+)\]\(([^)]+)\)/g;
-  
-  return text.replace(linkPattern, (match, type, linkText, url) => {
-    return `📎 ${type}: <a href="${url}" target="_blank" rel="noopener noreferrer" class="web-link">${linkText}</a>`;
-  });
-};
+// Note: Link conversion functionality moved to PortCallChecklist component
 
-// Helper component to render text with clickable links
-const TextWithLinks = ({ children }) => {
-  if (!children) return null;
-  
-  const convertedText = convertLinksToClickable(children);
-  
-  return (
-    <span 
-      dangerouslySetInnerHTML={{ __html: convertedText }}
-      className="text-with-links"
-    />
-  );
-};
+// Note: TextWithLinks component removed - functionality moved to PortCallChecklist
 
 function App() {
   const [port, setPort] = useState('');
